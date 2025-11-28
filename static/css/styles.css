@@ -1,0 +1,180 @@
+/* ----------------------------- */
+/*   Fonte e Reseta Básico       */
+/* ----------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0057ff, #ff002b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+/* ----------------------------- */
+/*   Container Principal          */
+/* ----------------------------- */
+.login-container {
+    background: #fff;
+    padding: 40px 35px;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to {   opacity: 1; transform: translateY(0); }
+}
+
+.form-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 25px;
+}
+
+/* ----------------------------- */
+/*   Mensagens de alerta         */
+/* ----------------------------- */
+.alert-message {
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 15px;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.alert-error {
+    background: #ffdddd;
+    color: #b30000;
+    border: 1px solid #ffbaba;
+}
+
+.alert-success {
+    background: #ddffdd;
+    color: #006600;
+    border: 1px solid #b3ffb3;
+}
+
+/* ----------------------------- */
+/*   Grupos de Inputs            */
+/* ----------------------------- */
+.name-group {
+    display: flex;
+    gap: 12px;
+}
+
+.input-group {
+    position: relative;
+    margin: 18px 0;
+    width: 100%;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 10px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+    transition: all 0.25s ease-in-out;
+}
+
+.input-group input:focus {
+    border-color: #7F5AF0;
+    box-shadow: 0 0 5px rgba(127, 90, 240, 0.4);
+}
+
+/* Label flutuante */
+.input-group label {
+    position: absolute;
+    left: 12px;
+    top: 14px;
+    color: #666;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: 0.25s ease-in-out;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+    top: -9px;
+    left: 8px;
+    background: #fff;
+    padding: 0 6px;
+    font-size: 0.78rem;
+    color: #7F5AF0;
+}
+
+/* ----------------------------- */
+/*   Botão                       */
+/* ----------------------------- */
+.login-button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border: none;
+    background: #7F5AF0;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.25s ease;
+    font-weight: 600;
+}
+
+.login-button:hover {
+    background: #6843d2;
+    transform: translateY(-2px);
+}
+
+/* ----------------------------- */
+/*   Rodapé do Formulário        */
+/* ----------------------------- */
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.form-footer p {
+    margin: 6px 0;
+}
+
+.register-link {
+    color: #7F5AF0;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.register-link:hover {
+    color: #492fa6;
+    text-decoration: underline;
+}
+
+/* ----------------------------- */
+/*   Responsividade              */
+/* ----------------------------- */
+@media (max-width: 480px) {
+    .name-group {
+        flex-direction: column;
+    }
+
+    .login-container {
+        padding: 35px 25px;
+    }
+}

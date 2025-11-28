@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChamaSonia - Cadastro Completo</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <form method="POST" class="login-form">
+            {% csrf_token %}
+            <h1 class="form-title">🚓 Junte-se à ChamaSonia!</h1>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert-message {% if message.tags == 'error' %}alert-error{% else %}alert-success{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="name-group">
+                <div class="input-group">
+                    <input type="text" id="first_name" name="first_name" required>
+                    <label for="first_name">Primeiro Nome</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="last_name" name="last_name" required>
+                    <label for="last_name">Sobrenome</label>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="email" name="email" required>
+                <label for="email">E-mail</label>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" name="password" required>
+                <label for="password">Crie sua Senha</label>
+            </div>
+
+            <button type="submit" class="login-button">Finalizar Cadastro</button>
+
+            <div class="form-footer">
+                <p><a href="#" class="register-link">Termos de Uso</a></p>
+                <p>Já tem uma conta?
+                    <a href="{% url 'user:login' %}" class="register-link">Fazer Login</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
