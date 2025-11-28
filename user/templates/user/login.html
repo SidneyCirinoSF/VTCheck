@@ -35,7 +35,8 @@
             <button type="submit" class="login-button">Entrar</button>
 
             <div class="form-footer">
-                <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+                <a href="{% url 'user:password_reset' %}" class="forgot-password">Esqueceu sua senha?</a>
+
                 <p>Ainda não tem conta? 
                     <a href="{% url 'user:cadastro' %}" class="register-link">Cadastre-se</a>
                 </p>

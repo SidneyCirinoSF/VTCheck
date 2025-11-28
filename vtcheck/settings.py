@@ -60,7 +60,7 @@ ROOT_URLCONF = 'vtcheck.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,6 +89,8 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'user.Usuario'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -122,7 +124,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
@@ -132,3 +133,11 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'suporte.simbora.app@gmail.com'
+EMAIL_HOST_PASSWORD = config('VTCHECK_PASSWORD')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
