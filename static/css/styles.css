@@ -178,3 +178,33 @@ body {
         padding: 35px 25px;
     }
 }
+
+/* Floating label para TEXTAREA */
+.input-group textarea {
+    width: 100%;
+    padding: 12px 10px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1rem;
+    background: transparent;
+    transition: all 0.25s ease-in-out;
+    resize: vertical;
+}
+
+/* Borda roxa quando focado */
+.input-group textarea:focus {
+    border-color: #7F5AF0;
+    box-shadow: 0 0 5px rgba(127, 90, 240, 0.4);
+}
+
+/* Fazer o label subir */
+.input-group textarea:focus + label,
+.input-group textarea:not(:placeholder-shown) + label {
+    top: -9px;
+    left: 8px;
+    background: #fff;
+    padding: 0 6px;
+    font-size: 0.78rem;
+    color: #7F5AF0;
+}

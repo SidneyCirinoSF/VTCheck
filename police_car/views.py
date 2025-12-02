@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Viatura
+from django.contrib import messages
 
 @login_required
 def dashboard(request):
@@ -41,3 +42,32 @@ def deletar_viatura(request, id):
     return render(request, 'police_car/confirmar_delete.html', {
         'viatura': viatura,
     })
+
+@login_required
+def adicionar_viatura(request):
+    if request.method == "POST":
+        placa = request.POST.get("placa")
+        prefixo = request.POST.get("prefixo")
+        modelo = request.POST.get("modelo")
+        ano = request.POST.get("ano")
+        status = request.POST.get("status")
+        descricao = request.POST.get("descricao_problema")
+
+        try:
+            Viatura.objects.create(
+                placa=placa,
+                prefixo=prefixo,
+                modelo=modelo,
+                ano=ano or None,
+                status=status,
+                descricao_problema=descricao
+            )
+            messages.success(request, "Viatura adicionada com sucesso!")
+            return redirect("police_car:dashboard")
+
+        except Exception as e:
+            messages.error(request, f"Erro ao adicionar: {e}")
+
+    return render(request, "police_car/adicionar_viatura.html")
+
+

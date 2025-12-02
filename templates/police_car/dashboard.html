@@ -33,10 +33,17 @@
             <h1 style="color:white; font-size:1.6rem;">Dashboard de Viaturas</h1>
 
             <div>
+                <a href="{% url 'police_car:adicionar_viatura' %}" style="padding:8px 12px; margin-right: 10px; background:#143fff; color:white; border-radius:8px; text-decoration:none;">Adicionar Viatura</a>
                 <a href="{% url 'police_car:dashboard' %}" style="margin-right:12px; color:white; font-weight:600; text-decoration:none;">Atualizar</a>
                 <a href="{% url 'user:logout' %}" style="padding:8px 12px; background:#e63946; color:white; border-radius:8px; text-decoration:none;">Logout</a>
             </div>
         </div>
+
+        <div style="text-align:right; margin-bottom:20px;">
+            
+
+        </div>
+
 
         <div class="login-container" style="max-width:100%; padding:24px;">
             <h2 class="form-title">Lista de Viaturas</h2>
@@ -60,7 +67,17 @@
                             <td>{{ v.placa }}</td>
                             <td>{{ v.modelo }}</td>
                             <td>{{ v.ano }}</td>
-                            <td>{{ v.get_status_display }}</td>
+                            <td>
+                                {{ v.get_status_display }}
+
+                                {% if v.status != "ok" and v.descricao_problema %}
+                                    <br>
+                                    <span style="color:#ff002b; font-size:0.85rem; font-weight:600;">
+                                        {{ v.descricao_problema }}
+                                    </span>
+                                {% endif %}
+                            </td>
+
                             <td>
                                 <a class="action-link action-edit" href="{% url 'police_car:editar' v.id %}">✏ Editar</a>
                                 <a class="action-link action-delete" href="{% url 'police_car:deletar' v.id %}">🗑 Excluir</a>
