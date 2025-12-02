@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Excluir Viatura</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div style="width:100%; max-width:420px; margin:40px auto;">
+        <div class="login-container">
+            <h1 class="form-title">Excluir Viatura?</h1>
+
+            <p style="text-align:center; margin-bottom:20px;">
+                Tem certeza que deseja excluir a viatura
+                <strong>{{ viatura.prefixo }} - {{ viatura.placa }}</strong>?
+            </p>
+
+            <form method="POST">
+                {% csrf_token %}
+                <button class="login-button" style="background:#ff002b;">Confirmar Exclusão</button>
+            </form>
+
+            <div class="form-footer" style="margin-top:12px;">
+                <a class="register-link" href="{% url 'police_car:dashboard' %}">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

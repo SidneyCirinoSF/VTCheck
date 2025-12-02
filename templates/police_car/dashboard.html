@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dashboard - Viaturas</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* pequenos ajustes locais para tabela dentro do card */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 18px;
+        }
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+        }
+        .action-link { font-weight:600; text-decoration:none; margin-right:10px; }
+        .action-edit { color:#0057ff; }
+        .action-delete { color:#ff002b; }
+        .topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+    </style>
+</head>
+<body>
+    <div style="width:100%; max-width:1000px; margin: 30px auto;">
+        <div class="topbar">
+            <h1 style="color:white; font-size:1.6rem;">Dashboard de Viaturas</h1>
+
+            <div>
+                <a href="{% url 'police_car:dashboard' %}" style="margin-right:12px; color:white; font-weight:600; text-decoration:none;">Atualizar</a>
+                <a href="{% url 'user:logout' %}" style="padding:8px 12px; background:#e63946; color:white; border-radius:8px; text-decoration:none;">Logout</a>
+            </div>
+        </div>
+
+        <div class="login-container" style="max-width:100%; padding:24px;">
+            <h2 class="form-title">Lista de Viaturas</h2>
+
+            {% if viaturas %}
+                <table class="table" role="table">
+                    <thead>
+                        <tr>
+                            <th>Prefixo</th>
+                            <th>Placa</th>
+                            <th>Modelo</th>
+                            <th>Ano</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for v in viaturas %}
+                        <tr>
+                            <td>{{ v.prefixo }}</td>
+                            <td>{{ v.placa }}</td>
+                            <td>{{ v.modelo }}</td>
+                            <td>{{ v.ano }}</td>
+                            <td>{{ v.get_status_display }}</td>
+                            <td>
+                                <a class="action-link action-edit" href="{% url 'police_car:editar' v.id %}">✏ Editar</a>
+                                <a class="action-link action-delete" href="{% url 'police_car:deletar' v.id %}">🗑 Excluir</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p style="text-align:center; margin:20px 0;">Nenhuma viatura cadastrada.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

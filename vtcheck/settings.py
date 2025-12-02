@@ -91,6 +91,7 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_USER_MODEL = 'user.Usuario'
+LOGIN_URL = 'user:login'
 
 AUTH_PASSWORD_VALIDATORS = [
     {

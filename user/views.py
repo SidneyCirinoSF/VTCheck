@@ -5,9 +5,9 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Usuario
 
 def pagina_login(request):
-    # Se já estiver logado, redireciona para home
+    # Se já estiver logado, redireciona para dashboard
     if request.user.is_authenticated:
-        return redirect('police_car:home')
+        return redirect('police_car:dashboard')
     
     if request.method == 'POST':
         email = request.POST.get('email')  # Agora usa email
@@ -19,7 +19,7 @@ def pagina_login(request):
         if user is not None:
             login(request, user)
             messages.success(request, f'Bem-vindo, {user.first_name}!')
-            return redirect('police_car:home')
+            return redirect('police_car:dashboard')
         else:
             messages.error(request, 'Email ou senha incorretos.')
     
@@ -27,7 +27,7 @@ def pagina_login(request):
 
 def pagina_cadastro(request):
     if request.user.is_authenticated:
-        return redirect('police_car:home')
+        return redirect('police_car:dashboard')
     
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -48,7 +48,7 @@ def pagina_cadastro(request):
             )
             login(request, user)
             messages.success(request, f'Cadastro realizado com sucesso! Bem-vindo, {user.first_name}!')
-            return redirect('police_car:home')
+            return redirect('police_car:dashboard')
     
     return render(request, 'user/register.html')
 

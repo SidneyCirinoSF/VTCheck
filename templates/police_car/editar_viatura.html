@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Editar Viatura</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div style="width:100%; max-width:600px; margin:40px auto;">
+        <div class="login-container">
+            <h1 class="form-title">Editar Viatura</h1>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="input-group">
+                    <input type="text" name="prefixo" value="{{ viatura.prefixo }}" required placeholder=" ">
+                    <label>Prefixo</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" name="placa" value="{{ viatura.placa }}" required placeholder=" ">
+                    <label>Placa</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="text" name="modelo" value="{{ viatura.modelo }}" required placeholder=" ">
+                    <label>Modelo</label>
+                </div>
+
+                <div class="input-group">
+                    <input type="number" name="ano" value="{{ viatura.ano }}" placeholder=" ">
+                    <label>Ano</label>
+                </div>
+
+                <div class="input-group" style="margin-top:10px;">
+                    <label style="position:static; font-size:0.9rem; color:#666; margin-bottom:6px; display:block;">Status</label>
+                    <select name="status" style="width:100%; padding:12px; border-radius:10px; border:2px solid #ccc;">
+                        {% for key, label in status_choices %}
+                            <option value="{{ key }}" {% if viatura.status == key %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-group" style="margin-top:12px;">
+                    <textarea name="descricao_problema" rows="4" placeholder=" " style="width:100%; padding:12px; border-radius:10px; border:2px solid #ccc;">{{ viatura.descricao_problema }}</textarea>
+                    <label>Descrição do problema</label>
+                </div>
+
+                <button class="login-button" type="submit" style="margin-top:14px;">Salvar</button>
+
+                <div class="form-footer" style="margin-top:12px;">
+                    <a class="register-link" href="{% url 'police_car:dashboard' %}">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
