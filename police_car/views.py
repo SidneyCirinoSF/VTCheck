@@ -1,13 +1,35 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Viatura
+from django.db.models import Q
 from django.contrib import messages
 
 @login_required
 def dashboard(request):
-    viaturas = Viatura.objects.all().order_by('prefixo')
+    viaturas = Viatura.objects.all().order_by('prefixo', 'placa')
+
+    # CONTADORES REAIS
+    total = viaturas.count()
+    ok = viaturas.filter(status='ok').count()
+    manutencao = viaturas.filter(status='manutencao').count()
+    inoperante = viaturas.filter(status='inoperante').count()
+
+    # BUSCA
+    busca = request.GET.get('q')
+    if busca:
+        viaturas = viaturas.filter(
+            Q(placa__icontains=busca) |
+            Q(prefixo__icontains=busca) |
+            Q(modelo__icontains=busca)
+        )
+
     return render(request, 'police_car/dashboard.html', {
         'viaturas': viaturas,
+        'total': total,
+        'ok': ok,
+        'manutencao': manutencao,
+        'inoperante': inoperante,
+        'busca': busca,
     })
 
 @login_required

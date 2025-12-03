@@ -31,7 +31,6 @@
     <div style="width:100%; max-width:1000px; margin: 30px auto;">
         <div class="topbar">
             <h1 style="color:white; font-size:1.6rem;">Dashboard de Viaturas</h1>
-
             <div>
                 <a href="{% url 'police_car:adicionar_viatura' %}" style="padding:8px 12px; margin-right: 10px; background:#143fff; color:white; border-radius:8px; text-decoration:none;">Adicionar Viatura</a>
                 <a href="{% url 'police_car:dashboard' %}" style="margin-right:12px; color:white; font-weight:600; text-decoration:none;">Atualizar</a>
@@ -46,6 +45,16 @@
 
 
         <div class="login-container" style="max-width:100%; padding:24px;">
+            <form method="get" style="margin-bottom:30px;">
+                <div class="input-group">
+                    <input type="text" name="q" value="{{ busca|default:'' }}" placeholder=" ">
+                    <label>Buscar por placa, prefixo ou modelo...</label>
+                </div>
+                <div style="text-align:right; margin-top:-10px;">
+                    <button type="submit" class="login-button" style="width:auto; padding:12px 30px;">BUSCAR</button>
+                    {% if busca %}<a href="{% url 'police_car:dashboard' %}" class="register-link" style="margin-left:15px;">Limpar</a>{% endif %}
+                </div>
+            </form>
             <h2 class="form-title">Lista de Viaturas</h2>
 
             {% if viaturas %}
