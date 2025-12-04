@@ -12,7 +12,7 @@ def pagina_login(request):
     if request.method == 'POST':
         email = request.POST.get('email')  # Agora usa email
         password = request.POST.get('password')
-        
+            
         # Autentica com email
         user = authenticate(request, email=email, password=password)
         

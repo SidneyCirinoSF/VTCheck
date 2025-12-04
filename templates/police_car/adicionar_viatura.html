@@ -2,77 +2,113 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Adicionar Viatura</title>
 
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-</head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-    <div style="width:100%; max-width:600px; margin:40px auto;">
+  <body>
+    <div style="width: 100%; max-width: 600px; margin: 40px auto">
+      <a
+        href="{% url 'police_car:dashboard' %}"
+        style="
+          color: white;
+          text-decoration: none;
+          font-weight: 600;
+          display: inline-block;
+          margin-bottom: 20px;
+        "
+      >
+        ← Voltar ao Dashboard
+      </a>
 
-        <a href="{% url 'police_car:dashboard' %}"
-           style="color:white; text-decoration:none; font-weight:600; display:inline-block; margin-bottom:20px;">
-           ← Voltar ao Dashboard
-        </a>
+      <div class="login-container" style="max-width: 100%">
+        <h2 class="form-title">Cadastrar Nova Viatura</h2>
 
-        <div class="login-container" style="max-width:100%;">
-            <h2 class="form-title">Cadastrar Nova Viatura</h2>
+        {% if msg %}
+        <div class="alert-message alert-error">{{ msg }}</div>
+        {% endif %}
 
-            {% if msg %}
-                <div class="alert-message alert-error">{{ msg }}</div>
-            {% endif %}
+        <form method="POST">
+          {% csrf_token %}
 
-            <form method="POST">
-                {% csrf_token %}
+          <div class="input-group">
+            <input type="text" name="prefixo" placeholder=" " required />
+            <label>Prefixo</label>
+          </div>
 
-                <div class="input-group">
-                    <input type="text" name="prefixo" placeholder=" " required>
-                    <label>Prefixo</label>
-                </div>
+          <div class="input-group">
+            <input type="text" name="placa" placeholder=" " required />
+            <label>Placa</label>
+          </div>
 
-                <div class="input-group">
-                    <input type="text" name="placa" placeholder=" " required>
-                    <label>Placa</label>
-                </div>
+          <div class="input-group">
+            <input type="text" name="modelo" placeholder=" " required />
+            <label>Modelo</label>
+          </div>
 
-                <div class="input-group">
-                    <input type="text" name="modelo" placeholder=" " required>
-                    <label>Modelo</label>
-                </div>
+          <div class="input-group">
+            <input type="number" name="ano" placeholder=" " />
+            <label>Ano</label>
+          </div>
 
-                <div class="input-group">
-                    <input type="number" name="ano" placeholder=" ">
-                    <label>Ano</label>
-                </div>
+          <div class="input-group">
+            <label
+              style="
+                top: -9px;
+                left: 8px;
+                background: white;
+                font-size: 0.78rem;
+                color: #7f5af0;
+              "
+            >
+              Status da Viatura
+            </label>
+            <select
+              name="status"
+              style="
+                width: 100%;
+                margin-top: 8px;
+                padding: 12px;
+                border: 2px solid #ccc;
+                border-radius: 10px;
+                font-size: 1rem;
+                outline: none;
+              "
+            >
+              <option value="ok">Em condições de uso</option>
+              <option value="manutencao">Em manutenção</option>
+              <option value="inoperante">Inoperante</option>
+            </select>
+          </div>
 
-                <div class="input-group">
-                    <label style="top:-9px; left:8px; background:white; font-size:0.78rem; color:#7F5AF0;">
-                        Status da Viatura
-                    </label>
-                    <select name="status" style="
-                        width:100%; margin-top:8px; padding:12px;
-                        border:2px solid #ccc; border-radius:10px;
-                        font-size:1rem; outline:none;">
-                        <option value="ok">Em condições de uso</option>
-                        <option value="manutencao">Em manutenção</option>
-                        <option value="inoperante">Inoperante</option>
-                    </select>
-                </div>
+          <div class="input-group">
+            <textarea
+              name="descricao_problema"
+              placeholder=" "
+              style="
+                width: 100%;
+                padding: 12px;
+                border: 2px solid #ccc;
+                border-radius: 10px;
+                height: 100px;
+                resize: none;
+                font-size: 1rem;
+              "
+            ></textarea>
+            <label>Descrição do Problema (se houver)</label>
+          </div>
 
-                <div class="input-group">
-                    <textarea name="descricao_problema" placeholder=" "
-                        style="width:100%; padding:12px; border:2px solid #ccc; border-radius:10px;
-                               height:100px; resize:none; font-size:1rem;"></textarea>
-                    <label>Descrição do Problema (se houver)</label>
-                </div>
-
-                <button class="login-button" type="submit">Salvar Viatura</button>
-            </form>
-        </div>
+          <button class="login-button" type="submit">Salvar Viatura</button>
+        </form>
+      </div>
     </div>
-</body>
+  </body>
 </html>
