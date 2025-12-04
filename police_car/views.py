@@ -8,13 +8,10 @@ from django.contrib import messages
 def dashboard(request):
     viaturas = Viatura.objects.all().order_by('prefixo', 'placa')
 
-    # CONTADORES REAIS
-    total = viaturas.count()
-    ok = viaturas.filter(status='ok').count()
-    manutencao = viaturas.filter(status='manutencao').count()
-    inoperante = viaturas.filter(status='inoperante').count()
+    status_filter = request.GET.get('status')
+    if status_filter in ['ok', 'manutencao', 'inoperante']:
+        viaturas = viaturas.filter(status=status_filter)
 
-    # BUSCA
     busca = request.GET.get('q')
     if busca:
         viaturas = viaturas.filter(
@@ -23,6 +20,11 @@ def dashboard(request):
             Q(modelo__icontains=busca)
         )
 
+    total = Viatura.objects.count()
+    ok = Viatura.objects.filter(status='ok').count()
+    manutencao = Viatura.objects.filter(status='manutencao').count()
+    inoperante = Viatura.objects.filter(status='inoperante').count()
+
     return render(request, 'police_car/dashboard.html', {
         'viaturas': viaturas,
         'total': total,
@@ -30,6 +32,7 @@ def dashboard(request):
         'manutencao': manutencao,
         'inoperante': inoperante,
         'busca': busca,
+        'status_filter': status_filter,
     })
 
 @login_required

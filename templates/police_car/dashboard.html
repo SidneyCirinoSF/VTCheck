@@ -55,6 +55,50 @@
                     {% if busca %}<a href="{% url 'police_car:dashboard' %}" class="register-link" style="margin-left:15px;">Limpar</a>{% endif %}
                 </div>
             </form>
+
+       
+            <div style="margin:30px 0; text-align:center;">
+                <div style="display:inline-flex; gap:14px; flex-wrap:wrap; justify-content:center; font-size:0.92rem;">
+                    <a href="{% url 'police_car:dashboard' %}" 
+                        class="login-button {% if not status_filter %}active{% endif %}" 
+                        style="padding:9px 18px !important; width:auto !important; min-width:110px; text-align:center; border-radius:10px; font-weight:600; text-decoration:none; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
+                        TODAS ({{ total }})
+                    </a>
+                    <a href="{% url 'police_car:dashboard' %}?status=ok" 
+                        class="login-button {% if status_filter == 'ok' %}active{% endif %}" 
+                        style="padding:9px 18px !important; width:auto !important; min-width:110px; text-align:center; background:#006400 !important; color:white !important; border-radius:10px; font-weight:600; box-shadow:0 4px 12px rgba(0,100,0,0.4);">
+                        OK ({{ ok }})
+                    </a>
+                    <a href="{% url 'police_car:dashboard' %}?status=manutencao" 
+                        class="login-button {% if status_filter == 'manutencao' %}active{% endif %}" 
+                        style="padding:9px 18px !important; width:auto !important; min-width:110px; text-align:center; background:#cc9a00 !important; color:white !important; border-radius:10px; font-weight:600; box-shadow:0 4px 12px rgba(204,154,0,0.5);">
+                        MANUT. ({{ manutencao }})
+                    </a>
+                    <a href="{% url 'police_car:dashboard' %}?status=inoperante" 
+                        class="login-button {% if status_filter == 'inoperante' %}active{% endif %}" 
+                        style="padding:9px 18px !important; width:auto !important; min-width:110px; text-align:center; background:#b30000 !important; color:white !important; border-radius:10px; font-weight:600; box-shadow:0 4px 12px rgba(179,0,0,0.5);">
+                        INOP. ({{ inoperante }})
+                    </a>
+                </div>
+            </div>
+
+
+            <style>
+                .login-button.active {
+                transform: translateY(-2px) scale(1.04) !important;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.35) !important;
+                font-weight: 700 !important;
+    }
+            </style>
+
+
+        <style>
+            .login-button.active {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            font-weight: 600;
+}
+        </style>
             <h2 class="form-title">Lista de Viaturas</h2>
 
             {% if viaturas %}
